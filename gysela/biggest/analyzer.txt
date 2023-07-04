@@ -1,0 +1,14 @@
+log dir: racliusp_gysela.exe_id4677454-3529_6-14-54931-16681118587453642770_1.darshan
+total logs: 1
+      shared file access: 0.000000 [0]
+file-per-proccess access: 1.000000 [1]
+             mpio access: 0.000000 [0]
+          pnetcdf access: 0.000000 [0]
+             hdf5 access: 0.000000 [0]
+
+I/O percentage of runtime:
+0.00-0.20: 1
+0.20-0.40: 0
+0.40-0.60: 0
+0.60-0.80: 0
+0.80-1.00: 0
