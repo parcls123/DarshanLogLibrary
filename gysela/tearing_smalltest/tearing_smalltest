@@ -1,0 +1,168 @@
+#******************************************
+# job parameters
+#******************************************
+NB_RESTART   = 0
+TIME         = 00:10:00
+MACHINE_FILE = 
+JOBNAME      = tearing
+
+#*******************************************
+#  Variables used to specify if the
+#   simulation is a restart from
+#   another one
+#*******************************************
+SEARCH_SP0   = 0           ! 0 if no restart, 1 otherwise
+DIR_SP0      =             ! if SEARCH_SP0=1, name of the directory
+	                   !   containing the major species restart files
+
+#*******************************************
+#  Variables for parallelization
+#*******************************************
+NSPECIES = 2
+NPROC_R  = 1
+NPROC_TH = 2
+NPROC_MU = 2
+NTHREAD  = 2
+
+#*******************************************
+#  Variables for radial profile input files
+#*******************************************
+
+#******************************************
+# gysela input datas
+#******************************************
+&PARALLEL
+  Nspecies       = $NSPECIES
+  Nbproc_r       = $NPROC_R
+  Nbproc_theta   = $NPROC_TH
+  Nbproc_mu      = $NPROC_MU
+  Nbthread       = $NTHREAD
+/
+
+&MESH
+  Nr                  = 63
+  Ntheta              = 64
+  Nphi                = 32
+  Nvpar               = 63
+  Nmu                 = $((NPROC_MU-1)) 
+  minor_radius        = 100.
+  rhomin              = 0.01
+  rhomax              = 1.
+  Ltheta              = 6.283185307179586476925286766559005768394
+  Lphi                = 6.283185307179586476925286766559005768394
+  aspect_ratio        = 3.3
+  nb_vth0             = 8.
+  Lmu                 = 32.
+  mumin               = 0.,
+/
+
+&EQUIL
+! Define the choice for electrons
+!  0 = "ADIABATIC"
+!  1 = "FULL-KINETIC"
+!  2 = "TRAPPED-KINETIC"
+  electron_type              = 1
+! The possible choices for the equilibrium distribution function are:
+!   1 = "MAXWELLIAN"[default]
+!   2 = "ENERGETIC_PARTICLES"
+  fequilibrium_type          = 1        , 1
+  tau0                       = 1.
+  A0                         = 1.
+  Z0                         = 1.
+  As                         = 1.       , 0.00054491
+  Zs                         = 1.       , -1.
+  species_frac               = 1.       , 1.
+  read_ns0                   = .false.  , .false.
+  read_Ts0                   = .false.  , .false.
+  read_q                     = .false.
+  read_Vpars0                = .false.  , .false.
+  profile_choice             = 1        , 1
+  rpeak                      = 0.5
+  kappa_ns0                  = 0.000000, 0.000000
+  kappa_Ts0                  = 0.000000, 0.000000
+  deltar_ns0                 = 0.2      , 0.2
+  deltar_Ts0                 = 0.1      , 0.1
+  Vpars0                     = 0.       , 0.
+  q_profile                  = 5
+  q_param1                   = 3.6
+  q_param2                   = 1.8
+  q_param3                   = 3.5
+  q_param4                   = 0.
+  beta_toro                  = 0.001
+  magnetic_drift             = .true.
+  perturb_amplitude          = 0.000 , 0.001
+  perturb_choice             = 1
+  m                          = 2
+  n                          = 1
+  !--> Gyroaverage tunable input parameters
+  gyroaverage                = .false., .false.
+  gyro_Nbpoints              = 7
+  TF_ripple                  = .false.
+  N_ripple                   = 0,
+/
+
+&COLLISION_OPERATOR
+  collision_strategy = "NONE" ! ("DEFAULT", "NONE", "V1", "V2", "V3", "EVOLNUSTAR", "MULTISPECIES")
+  nustar             = 0.0
+  coll_nbstep        = 1,
+/
+
+&BUFFER_REGION
+  coef_diffr       = 0.005    , 0.005
+  coef_diffth      = 0.0    , 0.0
+  buffer_asymmetry = .false.
+  right_buffer_only = .false.
+  buffer_location  = 0.025
+  buffer_stiffness = 0.05,
+/
+
+&ALGORITHM
+  Vlasov_scheme = "BSL"
+  aligned_strategy = "NONE"
+  advec_ampere     = .true.
+  solve_ampere     = .true.
+  FFTpotential_filter        = 0
+  FFTpotential_filter_deltam = 0.
+  deltat        = 1.0
+  nbiter        = 4
+  dt_diag       = 1.
+/
+
+&SOURCE
+  flux_driven     = .false.
+  heat_source     = .false.  , .false.
+  heat_version    = 0        , 0 
+  Sce0            = 0.01     , 0.
+  TS              = 1.       , 1.
+  rhoS            = 0.1      , 0.5 
+  LS              = 0.01     , 1.
+/
+
+&TEST
+  !--> Tests for QN solver
+  solve_QN             = .false.
+  !--> Tests for RHS of Boltzmann equation
+  RHS_only             = .false.
+  !--> Tests with simplified physics
+  BstareqB             = .false.
+  single_m             = .false.
+  single_n             = .true.
+  Rosenbluth_Hinton    = .false.
+  RH_init_strategy     = "COSKR"
+  RH_kr_n              = 1
+  !--> Tests for computer sciences
+  modulo_restart_iter  = 200
+/
+
+&OUTPUT
+  integration_CS       = .true.
+  diag_level           = 8
+  Phi3D_saving         = .true.
+  Moments3D_saving     = .true.
+  fluxes3D_GC_saving   = .true.
+  f5D_saving           = .false.
+  Phi3D_dt_diag        = 2.
+  Moments3D_dt_diag    = 2.
+  fluxes3D_GC_dt_diag  = 2.
+  f5D_dt_diag          = 20.
+/

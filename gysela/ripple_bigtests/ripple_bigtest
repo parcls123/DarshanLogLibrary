@@ -1,0 +1,181 @@
+#******************************************
+# job parameters
+#******************************************
+NB_RESTART   = 0
+TIME         = 01:00:00
+MACHINE_FILE = 
+JOBNAME      = pphi_G1
+
+#*******************************************
+#  Variables used to specify if the
+#   simulation is a restart from
+#   another one
+#*******************************************
+SEARCH_SP0   = 0           ! 0 if no restart, 1 otherwise
+DIR_SP0      = /ccc/scratch/cont003/drf/varenner/GYSELA_skl/DI_TEST_KNEO_PD_NUSTAR01_DIFFTH0000_GX_RG6             ! if SEARCH_SP0=1, name of the directory
+	                   ! containing the major species restart files
+
+#*******************************************
+#  Variables for parallelization
+#*******************************************
+NSPECIES = 1
+NPROC_R  = 2
+NPROC_TH = 2
+NPROC_MU = 4
+NTHREAD  = 8
+
+#*******************************************
+#  Variables for radial profile input files
+#*******************************************
+ns0_sp0_filename = ns0_sp0_test.dat
+ns0_sp1_filename = ns0_sp1_test.dat
+Ts0_sp0_filename = Ts0_sp0_test.dat
+Ts0_sp1_filename = Ts0_sp1_test.dat
+q_filename       = safety_factor_test.dat
+Vpars0_sp0_filename = Vpar0_sp0_test.dat   
+Vpars0_sp1_filemame = Vpar0_sp1_test,dat   
+ripple_filename  = profiles/RIPPLEG1.h5
+
+#******************************************
+# gysela input datas
+#******************************************
+&PARALLEL
+  Nspecies       = $NSPECIES
+  Nbproc_r       = $NPROC_R
+  Nbproc_theta   = $NPROC_TH
+  Nbproc_mu      = $NPROC_MU
+  Nbthread       = $NTHREAD,
+/
+
+&MESH
+  Nr                  = 511
+  Ntheta              = 64
+  Nphi                = 32
+  Nvpar               = 127
+  Nmu                 = $((NPROC_MU-1)) 
+  minor_radius        = 150.
+  rhomin              = 0.0
+  rhomax              = 1.15
+  Ltheta              = 6.283185307179586476925286766559005768394
+  Lphi                = 6.283185307179586476925286766559005768394
+  aspect_ratio        = 3.2
+  nb_vth0             = 7.
+  Lmu                 = 18.
+  mumin               = 0.,
+/
+
+&EQUIL
+! Define the choice for electrons
+!  0 = "ADIABATIC"
+!  1 = "FULL-KINETIC"
+!  2 = "TRAPPED-KINETIC"
+  electron_type              = 0
+! The possible choices for the equilibrium distribution function are:
+!   1 = "MAXWELLIAN"[default]
+!   2 = "ENERGETIC_PARTICLES"
+  fequilibrium_type          = 1 !GX 
+  !canonical_profile          = 0 !TEST
+  tau0                       = 1.
+  A0                         = 1.
+  Z0                         = 1.
+  As                         = 2.
+  Zs                         = 1.
+  species_frac               = 1.
+  read_ns0                   = .false.
+  read_Ts0                   = .false.
+  read_q                     = .false.
+  read_Vpars0                = .false.
+  read_pulse_profile         = 0 
+  profile_choice             = 1
+  rpeak                      = 0.5
+  kappa_ns0                  = 6.0
+  kappa_Ts0                  = 6.0
+  deltar_ns0                 = 0.2
+  deltar_Ts0                 = 0.2
+  Vpars0                     = 0.0 !GX 
+  q_profile                  = 4
+  q_param1                   = 0.854
+  q_param2                   = 0.
+  q_param3                   = 2.184
+  q_param4                   = 0.
+  magnetic_drift             = .true.
+  perturb_amplitude          = 0.
+  perturb_choice             = 1
+  m                          = 0
+  n                          = 0
+  !--> Gyroaverage tunable input parameters
+  gyroaverage                = .true.
+  gyro_Nbpoints              = 7
+  TF_ripple                  = .true.
+  !read_ripple                = .false.
+  !delta_ripple               = 0
+  N_ripple                   = 8,
+/
+
+&COLLISION_OPERATOR
+  collision_strategy = "GENERAL"
+  nustar          = 0.1
+  coll_nbstep     = 2,
+/
+
+&BUFFER_REGION
+  coef_diffr        = 0.0
+  coef_diffth       = 0.0
+  buffer_asymmetry  = .false.
+  right_buffer_only = .true.
+  buffer_location   = 0.062
+  buffer_stiffness  = 0.017635
+  SOL                    = .true.
+  SOL_separatrix         = 1.05
+  SOL_stiffness          = 0.026
+  SOL_exp_decay          = 1.e-3
+  SOL_krook_coeff = 0.03536 !GX
+/
+
+&ALGORITHM
+  Vlasov_scheme = "BSL"
+  aligned_strategy = "NONE" !GX
+  skiphole = .true. !GX
+  FFTpotential_filter        = 0 !GX
+  FFTpotential_filter_deltam = 0. !GX
+  deltat        = 3.
+  nbiter        = 10
+  dt_diag       = 6.
+/
+
+&SOURCE
+  flux_driven     = .true.
+  heat_source     = .true.
+  heat_version    = 0
+  Sce0            = 0.0
+  TS              = 1.5
+  rhoS            = 0.
+  LS              = 0.1,
+/
+
+&TEST
+  !--> Tests for QN solver
+  solve_QN             = .true.
+  !--> Tests for RHS of Boltzmann equation
+  RHS_only             = .false.
+  !--> Tests with simplified physics
+  BstareqB             = .false.
+  single_m             = .false.
+  single_n             = .false.
+  Rosenbluth_Hinton    = .false.
+  modulo_restart_iter  = 400,
+/
+
+&OUTPUT
+! checkpointing_strategy = "" ! empty or "DEFAULT", "NONE", "SYNC" 
+  integration_CS       = .true.
+  diag_level           = 8
+  Phi3D_saving         = .true.
+  Moments3D_saving     = .true.
+  fluxes3D_GC_saving   = .true.
+  f5D_saving           = .false.
+  Phi3D_dt_diag        = 30.
+  Moments3D_dt_diag    = 30.
+  fluxes3D_GC_dt_diag  = 30.
+  f5D_dt_diag          = 3000.
+/
