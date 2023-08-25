@@ -1,0 +1,202 @@
+  
+ ---------------------------------------------------------
+ 
+  Git revision         : 
+  GYSELA code version  :  21.00
+  Compiled by         : racliuspa
+  Compiled on         : ruche02.cluster
+  Compiled at          : 2023-05-17 13:55:21
+  Mpi Fortran Wrapper  : /gpfs/softs/spack/opt/spack/linux-centos7-cascadelake/intel-19.0.3.199/intel-mpi-2019.3.199-rplhb3fyzslp2dk6m5i3cwcoc73roagj/compilers_and_libraries_2019.3.199/linux/mpi/intel64/bin/mpiifort
+  Mpi C Wrapper        : /gpfs/softs/spack/opt/spack/linux-centos7-cascadelake/intel-19.0.3.199/intel-mpi-2019.3.199-rplhb3fyzslp2dk6m5i3cwcoc73roagj/compilers_and_libraries_2019.3.199/linux/mpi/intel64/bin/mpiicc
+  Fortran compile flags : -O3 -align all -diag-disable 5462
+  C compile flags       : -O3
+  Link flags            : 
+  HDF5 Version          : 
+  RST bunch size       :   1
+ ---------------------------------------------------------
+  
+ &PARALLEL
+ NSPECIES        =           1,
+ NBPROC_R        =           2,
+ NBPROC_THETA    =           2,
+ NBPROC_MU       =           4,
+ NBTHREAD        =           8
+ /
+ &MESH
+ NR      =         511,
+ NTHETA  =          64,
+ NPHI    =          32,
+ NVPAR   =         127,
+ NMU     =           3,
+ MINOR_RADIUS    =   150.000000000000     ,
+ RHOMIN  =  0.000000000000000E+000,
+ RHOMAX  =   1.15000000000000     ,
+ LTHETA  =   6.28318530717959     ,
+ LPHI    =   6.28318530717959     ,
+ ASPECT_RATIO    =   3.20000000000000     ,
+ NB_VTH0 =   7.00000000000000     ,
+ LMU     =   18.0000000000000     ,
+ MUMIN   =  0.000000000000000E+000
+ /
+ &EQUIL
+ ELECTRON_TYPE   =           0,
+ KINETICTE_COEFF =   1.00000000000000     ,
+ FEQUILIBRIUM_TYPE       = 3*1,
+ TAU0    =   1.00000000000000     ,
+ A0      =   1.00000000000000     ,
+ Z0      =   1.00000000000000     ,
+ AS      =   2.00000000000000     , 2*1.00000000000000        ,
+ ZS      = 3*1.00000000000000        ,
+ SPECIES_FRAC    =   1.00000000000000     , 2*0.000000000000000E+000  ,
+ READ_NS0        = 3*F,
+ READ_TS0        = 3*F,
+ READ_TE0        = F,
+ READ_Q  = F,
+ READ_VPARS0     = 3*F,
+ PROFILE_CHOICE  = 3*1,
+ RPEAK   =  0.500000000000000     ,
+ KAPPA_NS0       =   6.00000000000000     , 2*0.000000000000000E+000  ,
+ KAPPA_TS0       =   6.00000000000000     , 2*0.000000000000000E+000  ,
+ DELTAR_NS0      =  0.200000000000000     , 2*0.330000000000000       ,
+ DELTAR_TS0      =  0.200000000000000     , 2*0.330000000000000       ,
+ VPARS0  = 3*0.000000000000000E+000  ,
+ Q_PROFILE       =           4,
+ Q_PARAM1        =  0.854000000000000     ,
+ Q_PARAM2        =  0.000000000000000E+000,
+ Q_PARAM3        =   2.18400000000000     ,
+ Q_PARAM4        =  0.000000000000000E+000,
+ MAGNET_STRATEGY = CIRCULAR                                                                        ,
+ KAPPA_ELONGATION        =   1.00000000000000     ,
+ DELTA_TRIANGULARITY     =  0.000000000000000E+000,
+ SHAFRANOV_SHIFT = F,
+ BETA_TORO       =  0.000000000000000E+000,
+ MAGNETIC_DRIFT  = T,
+ PERTURB_AMPLITUDE       = 3*0.000000000000000E+000  ,
+ PERTURB_CHOICE  =           1,
+ N       =           0,
+ M       =           0,
+ GYROAVERAGE     = 3*T,
+ GYRO_NBPOINTS   =           7,
+ TF_RIPPLE       = T,
+ N_RIPPLE        =           8,
+ M_RIPPLE        =           0,
+ READ_PULSE_PROFILE      =           0,
+ LAMBDA_0        =  0.100000000000000     ,
+ DLAMBDA =  0.200000000000000     ,
+ TAU_R   =  0.000000000000000E+000,
+ ENERGY_B        =   42.0000000000000     ,
+ ENERGY_C        =   14.6300000000000     ,
+ DELTA_ENERGY    =   1.00000000000000     ,
+ NORM_INTEGRAL   =  0.299400000000000     
+ /
+ &COLLISION_OPERATOR
+ COLLISION_STRATEGY      = GENERAL                       ,
+ COLLISION_INTERSPECIES  = T,
+ NPOLYNOM        =           3,
+ NUSTAR  =  0.100000000000000     ,
+ COLL_NBSTEP     =           2
+ /
+ &SOURCE
+ FLUX_DRIVEN     = T,
+ HEAT_SOURCE     = T, 2*F,
+ HEAT_VERSION    =           0, 2*1,
+ SCE_HEAT_TYPE   = 3*0,
+ SCE0    =  0.000000000000000E+000, 2*1.000000000000000E-002  ,
+ TS      =   1.50000000000000     , 2*1.00000000000000        ,
+ RHOS    =  0.000000000000000E+000, 2*0.100000000000000       ,
+ LS      =  0.100000000000000     , 2*1.000000000000000E-002  ,
+ VOR_SOURCE      = 3*F,
+ SCE_VOR_TYPE    = 3*0,
+ SCE_VOR = 3*1.000000000000000E-002  ,
+ TS_VOR  = 3*1.00000000000000        ,
+ RHOS_VOR        = 3*0.100000000000000       ,
+ LS_VOR  = 3*1.000000000000000E-002  ,
+ MOM_SOURCE      = 3*F,
+ SCE_MOM = 3*1.000000000000000E-002  ,
+ TS_MOM  = 3*1.00000000000000        ,
+ RHOS_MOM        = 3*0.100000000000000       ,
+ LS_MOM  = 3*1.000000000000000E-002  
+ /
+ &BUFFER_REGION
+ COEF_DIFFR      = 3*0.000000000000000E+000  ,
+ COEF_DIFFTH     = 3*0.000000000000000E+000  ,
+ BUFFER_ASYMMETRY        = F,
+ RIGHT_BUFFER_ONLY       = T,
+ BUFFER_LOCATION =  6.200000000000000E-002,
+ BUFFER_STIFFNESS        =  1.763500000000000E-002,
+ SOL     = T,
+ SOL_SEPARATRIX  =   1.05000000000000     ,
+ SOL_STIFFNESS   =  2.600000000000000E-002,
+ SOL_EXP_DECAY   =  1.000000000000000E-003,
+ SOL_KROOK_COEFF =  3.536000000000000E-002, 2*0.000000000000000E+000  
+ /
+ &ALGORITHM
+ VLASOV_SCHEME   = BSL  ,
+ ADV2D_STRATEGY  =                                         ,
+ ADV1D_STRATEGY  =                                         ,
+ ALIGNED_STRATEGY        = NONE                                    ,
+ SKIPHOLE        = T,
+ SOLVE_AMPERE    = F,
+ ADVEC_AMPERE    = F,
+ FFTPOTENTIAL_FILTER_DELTAM      =  0.000000000000000E+000,
+ FFTPOTENTIAL_FILTER     =           0,
+ DELTAT  =   3.00000000000000     ,
+ NBITER  =          10,
+ DT_DIAG =   6.00000000000000     
+ /
+ &TEST
+ SOLVE_QN        = T,
+ ZF_DAMP_RPROFILE        = F,
+ RHS_ONLY        = F,
+ BSTAREQB        = F,
+ SINGLE_M        = F,
+ SINGLE_N        = F,
+ REMOVE_N0       = F,
+ REMOVE_MN0      = F,
+ ROSENBLUTH_HINTON       = F,
+ RH_INIT_STRATEGY        =                                         ,
+ RH_KR_N =           1,
+ MODULO_RESTART_ITER     =         400,
+ HDF5_ERRORS_ARE_FATAL   = T,
+ CULHAM_CIRCULARJ        = F
+ /
+ &OUTPUT
+ CHECKPOINTING_STRATEGY  =                     ,
+ CHECKPOINTING_RSTWRITE  = F,
+ INTEGRATION_CS  = T,
+ DIAG_LEVEL      =           8,
+ PHI3D_SAVING    = T,
+ PHI3D_DT_DIAG   =   30.0000000000000     ,
+ MOMENTS3D_SAVING        = T,
+ MOMENTS3D_DT_DIAG       =   30.0000000000000     ,
+ FLUXES3D_GC_SAVING      = T,
+ FLUXES3D_GC_DT_DIAG     =   30.0000000000000     ,
+ F5D_SAVING      = F,
+ F5D_DT_DIAG     =   3000.00000000000     
+ /
+ ---> perturb_amplitude is set to 0 as n or m is equal to 0
+  
+  
+  
+ *******************************************************************
+ ******      SOLVING WITH PREDICTOR-CORRECTOR ALGORITHM       ******
+ ******              WITH GYROAVERAGE                         ******
+ ******                                                       ******
+ ******              WITH FLUX DRIVEN CONDITIONS              ******
+ ******              WITH HEAT SOURCE                         ******
+ ******              WITH SOL-LIKE BOUNDARY CONDITIONS        ******
+ *******************************************************************
+  
+ ---> saving of Phi3D
+ ---> saving of Moments3D
+ ---> saving of fluxes3D_GC
+       0       0      10   0.000E+00   3.000E+00  1.784428331075E+08  1.784428331075E+08  1.000000000000E+00
+------------------------------------------------------------------------------------------------------------
+   GStep   LStep  NbStep        Time    TimeStep                  ni                  ne               ni/ne
+       1       1      10   3.000E+00   3.000E+00
+       2       2      10   6.000E+00   3.000E+00  1.790742905287E+08  1.784428331075E+08  1.003538709906E+00
+       3       3      10   9.000E+00   3.000E+00
+       4       4      10   1.200E+01   3.000E+00  1.840411856695E+08  1.784428331075E+08  1.031373367395E+00
+       5       5      10   1.500E+01   3.000E+00
+       6       6      10   1.800E+01   3.000E+00  1.895115079467E+08  1.784428331075E+08  1.062029248507E+00
+       7       7      10   2.100E+01   3.000E+00
